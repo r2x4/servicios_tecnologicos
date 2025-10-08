@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -10,13 +10,41 @@ import Cart from './pages/Cart';
 import { initialServices, initialUsers } from './data/database';
 import type { ViewType, User, Service, Purchase } from './types';
 
+// Función para obtener datos del localStorage de forma segura
+const loadFromLocalStorage = <T,>(key: string, defaultValue: T): T => {
+  try {
+    const storedValue = localStorage.getItem(key);
+    if (storedValue) {
+      return JSON.parse(storedValue);
+    }
+  } catch (error) {
+    console.error(`Error al cargar ${key} desde localStorage`, error);
+  }
+  return defaultValue;
+};
+
 const App: React.FC = () => {
   const [view, setView] = useState<ViewType>('home');
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [services, setServices] = useState<Service[]>(initialServices);
+  const [services, setServices] = useState<Service[]>(() => loadFromLocalStorage('services', initialServices));
   const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [cartItems, setCartItems] = useState<Service[]>([]);
-  const [purchases, setPurchases] = useState<Purchase[]>([]);
+  const [cartItems, setCartItems] = useState<Service[]>(() => loadFromLocalStorage('cartItems', []));
+  const [purchases, setPurchases] = useState<Purchase[]>(() => loadFromLocalStorage('purchases', []));
+
+  // Efecto para guardar el carrito en localStorage
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // Efecto para guardar las compras en localStorage
+  useEffect(() => {
+    localStorage.setItem('purchases', JSON.stringify(purchases));
+  }, [purchases]);
+
+  // Efecto para guardar los servicios (y su stock) en localStorage
+  useEffect(() => {
+    localStorage.setItem('services', JSON.stringify(services));
+  }, [services]);
 
   const handleNavigate = (newView: ViewType) => {
     if (newView === 'admin' && (!currentUser || !currentUser.isAdmin)) {
@@ -79,6 +107,18 @@ const App: React.FC = () => {
   const handleProceedToPayment = () => {
     if (cartItems.length === 0) return;
 
+    // Actualizar el stock de los servicios
+    const updatedServices = services.map(service => {
+      const cartItem = cartItems.find(item => item.id === service.id);
+      if (cartItem) {
+        const newQuantity = service.quantity - cartItem.quantity;
+        return { ...service, quantity: newQuantity >= 0 ? newQuantity : 0 };
+      }
+      return service;
+    });
+    setServices(updatedServices);
+
+    // Crear el registro de la compra
     const newPurchase: Purchase = {
       id: `compra-${Date.now()}`,
       items: [...cartItems],

@@ -30,7 +30,9 @@ const Admin: React.FC<AdminProps> = ({ services, purchases, onUpdateServices }) 
   };
 
   const handleDelete = (id: string) => {
-    onUpdateServices(services.filter(s => s.id !== id));
+    if (window.confirm('¿Estás seguro de que quieres eliminar este servicio?')) {
+      onUpdateServices(services.filter(s => s.id !== id));
+    }
   };
 
   const handleCreate = () => {
