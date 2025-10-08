@@ -1,4 +1,5 @@
 import React from 'react';
+import { Phone } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -13,8 +14,18 @@ const Footer: React.FC = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Contacto</h3>
-            <p className="text-gray-400">Email: contacto@techserve.com</p>
-            <p className="text-gray-400">Tel: +57 300 123 4567</p>
+            <p className="text-gray-400">
+              Email:{" "}
+              <a href="mailto:rrs230780@gmail.com" className="hover:text-white transition">
+                rrs230780@gmail.com
+              </a>
+            </p>
+            <div className="flex items-center text-gray-400">
+              <Phone className="w-4 h-4 mr-2" />
+              <a href="https://wa.me/573195059272" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+                +57 3195059272
+              </a>
+            </div>
             <p className="text-gray-400">Bogotá, Colombia</p>
           </div>
           <div>

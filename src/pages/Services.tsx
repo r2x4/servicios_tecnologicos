@@ -30,7 +30,7 @@ const Services: React.FC<ServicesProps> = ({ services, onSelectService }) => {
               </h3>
               <div className="flex justify-between items-center">
                 <span className="text-2xl font-bold text-blue-600">
-                  ${service.price.toLocaleString()}
+                  COP ${service.price.toLocaleString('es-CO')}
                 </span>
                 {service.onPromotion && (
                   <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">

@@ -174,7 +174,7 @@ const Admin: React.FC<AdminProps> = ({ services, onUpdateServices }) => {
             {services.map(service => (
               <tr key={service.id} className="border-b">
                 <td className="p-3">{service.name}</td>
-                <td className="p-3">${service.price.toLocaleString()}</td>
+                <td className="p-3">COP ${service.price.toLocaleString('es-CO')}</td>
                 <td className="p-3">{service.quantity}</td>
                 <td className="p-3">
                   <button onClick={() => handleEdit(service)} className="text-blue-600 mr-2">
