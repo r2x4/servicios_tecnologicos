@@ -23,22 +23,37 @@ Incluye una interfaz pública y un panel administrativo con un CRUD funcional (c
 A continuación, puedes agregar imágenes del sitio (interfaz, secciones, CRUD, etc.).  
 Guárdalas en una carpeta `screenshots/` o súbelas directamente al repositorio.
 
-### 📸 Portafolio público
-<img width="1917" height="1072" alt="image" src="https://github.com/user-attachments/assets/6ba83a8a-823c-429c-87cc-857e4161405f" />
 ---
-<img width="1917" height="1074" alt="image" src="https://github.com/user-attachments/assets/74ed2f50-7f81-4e79-8310-d330b3686f3e" />
+
+### 📸 Portafolio público
+<p align="center">
+  <img width="90%" alt="Portafolio 1" src="https://github.com/user-attachments/assets/6ba83a8a-823c-429c-87cc-857e4161405f" style="margin-bottom: 20px;">
+</p>
+
+<p align="center">
+  <img width="90%" alt="Portafolio 2" src="https://github.com/user-attachments/assets/74ed2f50-7f81-4e79-8310-d330b3686f3e" style="margin-bottom: 40px;">
+</p>
+
+---
 
 ### ⚙️ Panel administrativo
-<img width="1916" height="1071" alt="image" src="https://github.com/user-attachments/assets/a89c3e13-a8c5-4e72-b400-15040d111317" />
----
-<img width="1918" height="1073" alt="image" src="https://github.com/user-attachments/assets/3a149fe7-b667-4df2-af4a-a8d08628b02d" />
+<p align="center">
+  <img width="90%" alt="Panel Admin 1" src="https://github.com/user-attachments/assets/a89c3e13-a8c5-4e72-b400-15040d111317" style="margin-bottom: 20px;">
+</p>
 
+<p align="center">
+  <img width="90%" alt="Panel Admin 2" src="https://github.com/user-attachments/assets/3a149fe7-b667-4df2-af4a-a8d08628b02d" style="margin-bottom: 40px;">
+</p>
+
+---
 
 ### 🧩 Detalle de servicio
-
-<img width="1917" height="1073" alt="image" src="https://github.com/user-attachments/assets/29b2392a-5ccc-49e7-acb0-3d878f5a7ecc" />
+<p align="center">
+  <img width="90%" alt="Detalle de servicio" src="https://github.com/user-attachments/assets/29b2392a-5ccc-49e7-acb0-3d878f5a7ecc" style="margin-bottom: 40px;">
+</p>
 
 ---
+
 
 ## 🚀 Tecnologías utilizadas
 
