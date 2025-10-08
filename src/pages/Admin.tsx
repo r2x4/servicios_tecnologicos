@@ -177,10 +177,20 @@ const Admin: React.FC<AdminProps> = ({ services, onUpdateServices }) => {
                 <td className="p-3">COP ${service.price.toLocaleString('es-CO')}</td>
                 <td className="p-3">{service.quantity}</td>
                 <td className="p-3">
-                  <button onClick={() => handleEdit(service)} className="text-blue-600 mr-2">
+                  <button
+                    onClick={() => handleEdit(service)}
+                    className="text-blue-600 mr-2"
+                    aria-label={`Editar ${service.name}`}
+                    title="Editar"
+                  >
                     <Edit className="w-5 h-5" />
                   </button>
-                  <button onClick={() => handleDelete(service.id)} className="text-red-600">
+                  <button
+                    onClick={() => handleDelete(service.id)}
+                    className="text-red-600"
+                    aria-label={`Eliminar ${service.name}`}
+                    title="Eliminar"
+                  >
                     <Trash2 className="w-5 h-5" />
                   </button>
                 </td>
