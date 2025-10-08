@@ -6,6 +6,7 @@ import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import Cart from './pages/Cart';
 import { initialServices, initialUsers } from './data/database';
 import type { ViewType, User, Service } from './types';
 
@@ -14,6 +15,7 @@ const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [services, setServices] = useState<Service[]>(initialServices);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [cartItems, setCartItems] = useState<Service[]>([]);
 
   const handleNavigate = (newView: ViewType) => {
     if (newView === 'admin' && (!currentUser || !currentUser.isAdmin)) {
@@ -46,18 +48,29 @@ const App: React.FC = () => {
     setServices(updatedServices);
   };
   
+  const handleAddToCart = (service: Service) => {
+    setCartItems(prevItems => [...prevItems, service]);
+    alert(`${service.name} ha sido añadido al carrito!`);
+  };
+
+  const handleRemoveFromCart = (id: string) => {
+    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+  };
+
   const renderView = () => {
     switch (view) {
       case 'home':
         return <Home onNavigate={handleNavigate} />;
       case 'services':
-        return <Services services={services} onSelectService={handleSelectService} />;
+        return <Services services={services} onSelectService={handleSelectService} onAddToCart={handleAddToCart} />;
       case 'serviceDetail':
-        return <ServiceDetail service={selectedService} onNavigate={handleNavigate} />;
+        return <ServiceDetail service={selectedService} onNavigate={handleNavigate} onAddToCart={handleAddToCart} />;
       case 'login':
         return <Login users={initialUsers} onLogin={handleLogin} />;
       case 'admin':
         return <Admin services={services} onUpdateServices={handleUpdateServices} />;
+      case 'cart':
+        return <Cart cartItems={cartItems} onRemoveFromCart={handleRemoveFromCart} />;
       default:
         return <Home onNavigate={handleNavigate} />;
     }
@@ -67,6 +80,7 @@ const App: React.FC = () => {
     <div className="bg-gray-100 min-h-screen flex flex-col">
       <Navbar
         currentUser={currentUser}
+        cartItems={cartItems}
         onNavigate={handleNavigate}
         onLogout={handleLogout}
       />

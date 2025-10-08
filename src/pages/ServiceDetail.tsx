@@ -1,13 +1,14 @@
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, ShoppingCart } from 'lucide-react';
 import type { Service, ViewType } from '../types';
 
 interface ServiceDetailProps {
   service: Service | null;
   onNavigate: (view: ViewType) => void;
+  onAddToCart?: (service: Service) => void;
 }
 
-const ServiceDetail: React.FC<ServiceDetailProps> = ({ service, onNavigate }) => {
+const ServiceDetail: React.FC<ServiceDetailProps> = ({ service, onNavigate, onAddToCart = () => {} }) => {
   if (!service) return null;
   
   return (
@@ -55,8 +56,12 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service, onNavigate }) =>
             </div>
           </div>
           
-          <button className="w-full bg-blue-600 text-white py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition">
-            Solicitar Servicio
+          <button
+            onClick={() => onAddToCart(service)}
+            className="w-full bg-blue-600 text-white py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center"
+          >
+            <ShoppingCart className="w-6 h-6 mr-3" />
+            Añadir al Carrito
           </button>
         </div>
       </div>

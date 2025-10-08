@@ -1,14 +1,15 @@
 import React from 'react';
-import { Home, Briefcase, User, LogOut, LogIn } from 'lucide-react';
-import type { ViewType, User as UserType } from '../types';
+import { Home, Briefcase, User, LogOut, LogIn, ShoppingCart } from 'lucide-react';
+import type { ViewType, User as UserType, Service } from '../types';
 
 interface NavbarProps {
   currentUser: UserType | null;
+  cartItems?: Service[];
   onNavigate: (view: ViewType) => void;
   onLogout: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ currentUser, onNavigate, onLogout }) => {
+const Navbar: React.FC<NavbarProps> = ({ currentUser, cartItems = [], onNavigate, onLogout }) => {
   const navItems = [
     { view: 'home', label: 'Inicio', icon: Home },
     { view: 'services', label: 'Servicios', icon: Briefcase },
@@ -39,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, onNavigate, onLogout }) =>
             ))}
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
             {currentUser ? (
               <>
                 {currentUser.isAdmin && (
@@ -68,6 +69,18 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, onNavigate, onLogout }) =>
                 Admin Login
               </button>
             )}
+            <button
+              onClick={() => onNavigate('cart')}
+              className="relative text-gray-600 hover:text-blue-600 transition"
+              aria-label={`Carrito con ${cartItems.length} items`}
+            >
+              <ShoppingCart className="w-7 h-7" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </div>
