@@ -25,17 +25,16 @@ Guárdalas en una carpeta `screenshots/` o súbelas directamente al repositorio.
 
 ### 📸 Portafolio público
 <img width="1917" height="1072" alt="image" src="https://github.com/user-attachments/assets/6ba83a8a-823c-429c-87cc-857e4161405f" />
-
+#
 <img width="1917" height="1074" alt="image" src="https://github.com/user-attachments/assets/74ed2f50-7f81-4e79-8310-d330b3686f3e" />
 
 ### ⚙️ Panel administrativo
 <img width="1916" height="1071" alt="image" src="https://github.com/user-attachments/assets/a89c3e13-a8c5-4e72-b400-15040d111317" />
-
+#
 <img width="1918" height="1073" alt="image" src="https://github.com/user-attachments/assets/3a149fe7-b667-4df2-af4a-a8d08628b02d" />
 
 
 ### 🧩 Detalle de servicio
-![Detalle del servicio](screenshots/detalle.png)
 
 <img width="1917" height="1073" alt="image" src="https://github.com/user-attachments/assets/29b2392a-5ccc-49e7-acb0-3d878f5a7ecc" />
 
