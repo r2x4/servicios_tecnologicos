@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# 💻 Servicios de Tecnología
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6C5CE7?logo=vite&logoColor=yellow)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel&logoColor=white)](https://vercel.com/)
 
-Currently, two official plugins are available:
+Aplicación desarrollada con **React + TypeScript + Vite**, diseñada para mostrar los servicios ofrecidos por una empresa de tecnología.  
+Incluye una interfaz pública y un panel administrativo con un CRUD funcional (crear, editar, eliminar y listar servicios).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🌐 Demo en línea
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🔗 **Versión desplegada en Vercel:**  
+👉 [https://servicios-tecnologicos.vercel.app/](https://servicios-tecnologicos.vercel.app/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🖼️ Capturas de pantalla
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+A continuación, puedes agregar imágenes del sitio (interfaz, secciones, CRUD, etc.).  
+Guárdalas en una carpeta `screenshots/` o súbelas directamente al repositorio.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 📸 Portafolio público
+<img width="1917" height="1072" alt="image" src="https://github.com/user-attachments/assets/6ba83a8a-823c-429c-87cc-857e4161405f" />
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<img width="1917" height="1074" alt="image" src="https://github.com/user-attachments/assets/74ed2f50-7f81-4e79-8310-d330b3686f3e" />
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### ⚙️ Panel administrativo
+<img width="1916" height="1071" alt="image" src="https://github.com/user-attachments/assets/a89c3e13-a8c5-4e72-b400-15040d111317" />
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+<img width="1918" height="1073" alt="image" src="https://github.com/user-attachments/assets/3a149fe7-b667-4df2-af4a-a8d08628b02d" />
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+
+### 🧩 Detalle de servicio
+![Detalle del servicio](screenshots/detalle.png)
+
+<img width="1917" height="1073" alt="image" src="https://github.com/user-attachments/assets/29b2392a-5ccc-49e7-acb0-3d878f5a7ecc" />
+
+---
+
+## 🚀 Tecnologías utilizadas
+
+- ⚛️ **React 18**  
+- 🟦 **TypeScript 5**  
+- ⚡ **Vite**  
+- 🎨 **Tailwind CSS**  
+- 🧠 **React Hooks**  
+- 💾 **LocalStorage** (persistencia de datos local)  
+- ☁️ **Despliegue:** Vercel  
+
+---
+
+## 🧩 Funcionalidades principales
+
+### 🌐 Sitio público
+- Página de inicio con presentación e información de la empresa  
+- Catálogo de servicios con imágenes y descripciones  
+- Navegación fluida con React Router  
+- Componentes reutilizables (`Navbar`, `Footer`, `Card`, etc.)
+
+### 🔐 Panel Administrativo (CRUD)
+- Crear, editar y eliminar servicios  
+- Validaciones de campos obligatorios  
+- Persistencia local de los datos  
+- Interfaz simple y moderna  
+
+---
+
+## 📂 Estructura del proyecto
+
+```text
+servicios_de_tecnologia/
+├── public/
+│   └── logo.svg
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── data/
+│   ├── types/
+│   ├── App.tsx
+│   └── main.tsx
+│
+├── package.json
+├── tailwind.config.js
+└── tsconfig.json
+
