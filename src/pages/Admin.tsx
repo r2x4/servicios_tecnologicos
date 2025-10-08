@@ -77,7 +77,19 @@ const Admin: React.FC<AdminProps> = ({ services, purchases, onUpdateServices }) 
   };
 
   const downloadJSON = () => {
-    const dataStr = JSON.stringify(purchases, null, 2);
+    const cleanedPurchases = purchases.map(purchase => ({
+      id: purchase.id,
+      date: purchase.date,
+      total: purchase.total,
+      items: purchase.items.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+    }));
+
+    const dataStr = JSON.stringify(cleanedPurchases, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
     
     const linkElement = document.createElement('a');
