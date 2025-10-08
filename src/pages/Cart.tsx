@@ -5,10 +5,11 @@ import type { Service } from '../types';
 interface CartProps {
   cartItems?: Service[];
   onRemoveFromCart?: (id: string) => void;
+  onProceedToPayment?: () => void;
 }
 
-const Cart: React.FC<CartProps> = ({ cartItems = [], onRemoveFromCart = () => {} }) => {
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+const Cart: React.FC<CartProps> = ({ cartItems = [], onRemoveFromCart = () => {}, onProceedToPayment = () => {} }) => {
+  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -21,13 +22,16 @@ const Cart: React.FC<CartProps> = ({ cartItems = [], onRemoveFromCart = () => {}
       ) : (
         <div className="bg-white rounded-lg shadow-lg">
           <ul className="divide-y divide-gray-200">
-            {cartItems.map((item, index) => (
-              <li key={`${item.id}-${index}`} className="p-4 flex justify-between items-center">
+            {cartItems.map((item) => (
+              <li key={item.id} className="p-4 flex justify-between items-center">
                 <div className="flex items-center">
                   <img src={item.image} alt={item.name} className="w-16 h-16 rounded-md object-cover mr-4" />
                   <div>
                     <h3 className="font-semibold text-lg">{item.name}</h3>
-                    <p className="text-blue-600 font-bold">COP ${item.price.toLocaleString('es-CO')}</p>
+                    <p className="text-gray-500">
+                      Cantidad: <span className="font-bold text-gray-700">{item.quantity}</span>
+                    </p>
+                    <p className="text-blue-600 font-bold">COP ${item.price.toLocaleString('es-CO')} c/u</p>
                   </div>
                 </div>
                 <button
@@ -45,7 +49,10 @@ const Cart: React.FC<CartProps> = ({ cartItems = [], onRemoveFromCart = () => {}
               <span>Total:</span>
               <span>COP ${total.toLocaleString('es-CO')}</span>
             </div>
-            <button className="w-full mt-6 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition text-lg">
+            <button
+              onClick={onProceedToPayment}
+              className="w-full mt-6 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition text-lg"
+            >
               Proceder al Pago
             </button>
           </div>

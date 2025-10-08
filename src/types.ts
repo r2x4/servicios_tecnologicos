@@ -16,3 +16,10 @@ export interface Service {
   onPromotion: boolean;
   image: string;
 }
+
+export interface Purchase {
+  id: string;
+  items: Service[];
+  total: number;
+  date: string;
+}

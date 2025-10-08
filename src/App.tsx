@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import Admin from './pages/Admin';
 import Cart from './pages/Cart';
 import { initialServices, initialUsers } from './data/database';
-import type { ViewType, User, Service } from './types';
+import type { ViewType, User, Service, Purchase } from './types';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewType>('home');
@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [services, setServices] = useState<Service[]>(initialServices);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [cartItems, setCartItems] = useState<Service[]>([]);
+  const [purchases, setPurchases] = useState<Purchase[]>([]);
 
   const handleNavigate = (newView: ViewType) => {
     if (newView === 'admin' && (!currentUser || !currentUser.isAdmin)) {
@@ -49,12 +50,46 @@ const App: React.FC = () => {
   };
   
   const handleAddToCart = (service: Service) => {
-    setCartItems(prevItems => [...prevItems, service]);
+    setCartItems(prevItems => {
+      const existingItem = prevItems.find(item => item.id === service.id);
+      if (existingItem) {
+        // Si el item ya existe, incrementamos su cantidad
+        return prevItems.map(item =>
+          item.id === service.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      // Si es un item nuevo, lo añadimos con cantidad 1
+      return [...prevItems, { ...service, quantity: 1 }];
+    });
     alert(`${service.name} ha sido añadido al carrito!`);
   };
 
   const handleRemoveFromCart = (id: string) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+    setCartItems(prevItems => {
+      const itemToRemove = prevItems.find(item => item.id === id);
+      if (itemToRemove && itemToRemove.quantity > 1) {
+        // Si la cantidad es mayor a 1, la decrementamos
+        return prevItems.map(item => item.id === id ? { ...item, quantity: item.quantity - 1 } : item);
+      }
+      // Si la cantidad es 1 o el item no se encuentra, lo eliminamos del carrito
+      return prevItems.filter(item => item.id !== id);
+    });
+  };
+
+  const handleProceedToPayment = () => {
+    if (cartItems.length === 0) return;
+
+    const newPurchase: Purchase = {
+      id: `compra-${Date.now()}`,
+      items: [...cartItems],
+      total: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      date: new Date().toISOString(),
+    };
+
+    setPurchases(prev => [...prev, newPurchase]);
+    setCartItems([]);
+    alert('¡Gracias por tu compra! Tu pago ha sido procesado exitosamente.');
+    setView('services');
   };
 
   const renderView = () => {
@@ -68,9 +103,9 @@ const App: React.FC = () => {
       case 'login':
         return <Login users={initialUsers} onLogin={handleLogin} />;
       case 'admin':
-        return <Admin services={services} onUpdateServices={handleUpdateServices} />;
+        return <Admin services={services} purchases={purchases} onUpdateServices={handleUpdateServices} />;
       case 'cart':
-        return <Cart cartItems={cartItems} onRemoveFromCart={handleRemoveFromCart} />;
+        return <Cart cartItems={cartItems} onRemoveFromCart={handleRemoveFromCart} onProceedToPayment={handleProceedToPayment} />;
       default:
         return <Home onNavigate={handleNavigate} />;
     }
